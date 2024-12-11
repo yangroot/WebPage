@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,15 +12,18 @@
             margin: 0;
             padding: 0;
         }
+
         header {
             background-color: #333;
             color: white;
             padding: 10px 0;
             text-align: center;
         }
+
         main {
             padding: 20px;
         }
+
         footer {
             background-color: #333;
             color: white;
@@ -29,21 +33,79 @@
             width: 100%;
             bottom: 0;
         }
+
         figure {
             margin: 0;
-            text-align: center; /* 使图片居中显示 */
+            text-align: center;
+            /* 使图片居中显示 */
         }
+
         img {
-            width: 50%;        /* 让图片适应容器 */
-            height: auto;       /* 保持图片比例 */
+            width: 50%;
+            /* 让图片适应容器 */
+            height: auto;
+            /* 保持图片比例 */
         }
+
         p {
-            font-size: 18px;    /* 设置文字大小 */
-            color: black;       /* 文字颜色 */
-            margin-top: 10px;    /* 设置图片与文字之间的间距 */
+            font-size: 18px;
+            /* 设置文字大小 */
+            color: black;
+            /* 文字颜色 */
+            margin-top: 10px;
+            /* 设置图片与文字之间的间距 */
+        }
+
+        .dropdown-container {
+            display: flex;
+            /* Use flexbox to align elements in a row */
+            gap: 20px;
+            /* Adds space between the dropdowns */
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
         }
     </style>
+
+    <script>
+        function updateTextBox() {
+            var dropdown = document.getElementById("fruit");
+            var textBox = document.getElementById("outputText");
+
+            // Get the selected option
+            var selectedValue = dropdown.value;
+
+            // Update the text box based on the selected value
+            if (selectedValue === "apple") {
+                textBox.value = "You selected Apple!";
+            } else if (selectedValue === "banana") {
+                textBox.value = "You selected Banana!";
+            } else if (selectedValue === "cherry") {
+                textBox.value = "You selected Cherry!";
+            } else {
+                textBox.value = ""; // Clear text box if no selection
+            }
+        }
+
+        function listFiles() {
+            var input = document.getElementById("fileInput");
+            var output = document.getElementById("fileList");
+            var fileNames = [];
+
+            // Loop through the files and collect their names
+            for (var i = 0; i < input.files.length; i++) {
+                fileNames.push(input.files[i].name);
+            }
+
+            // Display the file names in the text box
+            output.value = fileNames.join("\n");
+        }
+
+    </script>
 </head>
+
 <body>
     <header>
         <h1>Welcome to my first webpage</h1>
@@ -51,26 +113,33 @@
     <main>
         <h2>This is a simple webpage</h2>
 
-        <form>
-            <label for="fruits">Choose a fruit:</label>
-            <select id="fruits" name="fruits">
-                <option value="apple">Apple</option>
-                <option value="banana">Banana</option>
-                <option value="cherry">Cherry</option>
-                <option value="orange">Orange</option>
-                <option value="grape">Grape</option>
-            </select>
-        </form>
+        <label for="fruit">Choose a fruit:</label>
+        <select id="fruit" name="fruit" onchange="updateTextBox()">
+            <option value="">--Select--</option>
+            <option value="apple">Apple</option>
+            <option value="banana">Banana</option>
+            <option value="cherry">Cherry</option>
+        </select>
+        <label for="outputText">Selected Fruit Text:</label>
+        <input type="text" id="outputText" readonly>
 
-        <p>Here is a picture：</p>        
+        <br><br>
+        <input type="file" id="fileInput" multiple onchange="listFiles()">
+        <br><br>
+        <label for="fileList">Selected Files:</label>
+        <textarea id="fileList" readonly rows="10" cols="50"></textarea>
+        
+
+        <p>Here is a picture：</p>
         <figure>
             <img src="Realtime_view_SkyVision.png" alt="show picture">
         </figure>
-        <!-- 添加图片下方的段落 -->        
-        <p>Click this link and jump to <a href="https://www.example.com" target="_blank">Example site</a>。</p>        
+        <!-- 添加图片下方的段落 -->
+        <p>Click this link and jump to <a href="https://www.example.com" target="_blank">Example site</a>。</p>
     </main>
     <footer>
         <p>&copy;2024 My First Webpage</p>
     </footer>
 </body>
+
 </html>
